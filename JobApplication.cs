@@ -23,7 +23,7 @@ namespace ConsoleApp
         //GetSummary() – returnerar en kort sammanfattning av ansökan.
         public string GetSummary()
         {
-            return $"{CompanyName} - {PositionTitle}, {Status}";
+            return $"{CompanyName} - {PositionTitle}, {Status},{SalaryExpectation}";
         }
     }
 }
