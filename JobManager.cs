@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace ConsoleApp
 {
     public class JobManager
     {
@@ -8,7 +10,7 @@
 
         //======================metoder========================
 
-       //AddJob() – lägger till en ny ansökan
+        //AddJob() – lägger till en ny ansökan
         public void AddJob()
         {
             JobApplication newJob = new JobApplication();
@@ -26,7 +28,7 @@
             newJob.ApplicationDate = DateTime.Parse(Console.ReadLine());
 
             Console.WriteLine("Ange löneförväntning: (i kronor)");
-            newJob.SalaryExpectation=Convert.ToInt32(Console.ReadLine());
+            newJob.SalaryExpectation = Convert.ToInt32(Console.ReadLine());
 
             Applications.Add(newJob); //sparar hela objektet med all info i listan
             Console.WriteLine("Ansökan tillagd!");
@@ -51,9 +53,25 @@
         //ShowAll() – visar alla ansökningar
         public void ShowAll()
         {
-            foreach(var item in Applications)
+            foreach (var item in Applications)
             {
                 Console.WriteLine(item.GetSummary());
+            }
+        }
+        public void DeleteJob()
+        {
+            Console.WriteLine("Vilket företag vill du ta bort ansökan från? ");
+            ////Leta upp ansökan baserat på företagsnamnet
+            var del = Applications.FirstOrDefault(a => a.CompanyName == Console.ReadLine());
+            if (del != null)
+            {
+                // // Ta bort objektet från listan
+                Applications.Remove(del);
+                Console.WriteLine("Ansökan borttagen.");
+            }
+            else
+            {
+                Console.WriteLine("Ingen ansökan hittades med det företaget.");
             }
         }
     }
