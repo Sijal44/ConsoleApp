@@ -53,6 +53,12 @@ namespace ConsoleApp
         //ShowAll() – visar alla ansökningar
         public void ShowAll()
         {
+             ////Om listan är tom → visar bara ett kort meddeland
+            if (Applications.Count == 0)
+            {
+                    Console.WriteLine("Inga ansökningar finns ännu.");
+                    return;
+            }
             foreach (var item in Applications)
             {
                 Console.WriteLine(item.GetSummary());
