@@ -21,6 +21,8 @@
                 Console.Write("Välj ett alternativ: ");
 
                 string choice = Console.ReadLine();
+                Console.Clear();
+
 
                 switch (choice)
                 {
