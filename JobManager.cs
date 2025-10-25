@@ -1,19 +1,21 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using System.IO;
 
 namespace ConsoleApp
 {
     public class JobManager
     {
-        //Attributer :
+
         //Applications Samling av alla ansökningar
         List<JobApplication> Applications = new List<JobApplication>();
 
         //======================metoder========================
 
-        //AddJob() – lägger till en ny ansökan
-        public void AddJob()
+        public void AddJob()//AddJob() – lägger till en ny ansökan
         {
             JobApplication newJob = new JobApplication();
+
             Console.WriteLine("Ange företagsnamn:");
             newJob.CompanyName = Console.ReadLine();
 
@@ -24,7 +26,7 @@ namespace ConsoleApp
             newJob.Status = Console.ReadLine();
 
             Console.WriteLine("Ange ansökningsdatum (YYYY-MM-DD):");
-            newJob.ApplicationDate = DateTime.Now; //aktuellt datum och tid just nu
+            //aktuellt datum och tid just nu
             newJob.ApplicationDate = DateTime.Parse(Console.ReadLine());
 
             Console.WriteLine("Ange löneförväntning: (i kronor)");
@@ -32,12 +34,14 @@ namespace ConsoleApp
 
             Applications.Add(newJob); //sparar hela objektet med all info i listan
             Console.WriteLine("Ansökan tillagd!");
+
         }
-        //UpdateStatus() – ändrar status på en befintlig ansökan
-        public void UpdateStatus()
+        
+        public void UpdateStatus()//UpdateStatus() – ändrar status på en befintlig ansökan
         {
             Console.Write("Vilket företag vill du ändra status på? ");
             string company = Console.ReadLine();
+
 
             JobApplication job = Applications.FirstOrDefault(a => a.CompanyName == company);
 
@@ -49,15 +53,16 @@ namespace ConsoleApp
             Console.Write("Ange ny status (Applied, Interview, Offer, Rejected): ");
             job.Status = Console.ReadLine();
             Console.WriteLine("Status uppdaterad!");
+
         }
-        //ShowAll() – visar alla ansökningar
-        public void ShowAll()
+       
+        public void ShowAll() //ShowAll() – visar alla ansökningar
         {
-             ////Om listan är tom → visar bara ett kort meddelande
+            ////Om listan är tom → visar bara ett kort meddelande
             if (Applications.Count == 0)
             {
-                    Console.WriteLine("Inga ansökningar finns ännu.");
-                    return;
+                Console.WriteLine("Inga ansökningar finns ännu.");
+                return;
             }
             foreach (var item in Applications)
             {
@@ -67,13 +72,15 @@ namespace ConsoleApp
         public void DeleteJob()
         {
             Console.WriteLine("Vilket företag vill du ta bort ansökan från? ");
+
             ////Leta upp ansökan baserat på företagsnamnet
             var del = Applications.FirstOrDefault(a => a.CompanyName == Console.ReadLine());
             if (del != null)
             {
+  
+                Console.WriteLine("Ansökan borttagen.");
                 // // Ta bort objektet från listan
                 Applications.Remove(del);
-                Console.WriteLine("Ansökan borttagen.");
             }
             else
             {
