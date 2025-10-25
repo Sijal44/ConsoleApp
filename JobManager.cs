@@ -66,7 +66,7 @@ namespace ConsoleApp
             }
             foreach (var item in Applications)
             {
-                Console.WriteLine(item.GetSummary()); //skriver ut en kort sammanfattning
+                Console.WriteLine(item.GetSummary()); //skriver ut en kort sammanfattning....
             }
         }
         public void DeleteJob()
